@@ -1,0 +1,8 @@
+export const SET_USER_LOGIN = 'SET_USER_LOGIN'
+export const SET_USER_LOGOUT = 'SET_USER_LOGOUT'
+
+export const SET_CURRENT_ARTICLE = 'SET_CURRENT_ARTICLE'//当前阅读的文章
+
+export const SET_ITEM_INDEX = 'SET_ITEM_INDEX'//当前ITEM的INDEX
+
+
