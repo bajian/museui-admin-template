@@ -10,6 +10,7 @@ import {sskey_user} from './persistent.js'
 
 import './assets/css/global.css'
 import './assets/css/normalize.css'
+import './assets/css/md_iconfont.css'
 
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
