@@ -3,8 +3,8 @@
 
   <div>
   <label class="title">后台管理</label><br/>
-    <mu-text-field label="用户名" labelFloat/><br/>
-  <mu-text-field label="密码" hintText="请输入密码" type="password" labelFloat/><br/>
+    <mu-text-field label="用户名" v-model="account" labelFloat/><br/>
+  <mu-text-field label="密码" hintText="请输入密码" v-model="pwd" type="password" labelFloat/><br/>
    <mu-raised-button @click="login()" label="登录" class="demo-raised-button" primary/>
   </div>
 
@@ -32,7 +32,7 @@
     this.$nextTick(function () {
       window.hasLoadedCenter=true
       const name=ls.val(lskey_username)
-      if (window.notAutoLogin) {
+      if (config.notAutoLogin) {
         this.account=name||''
         return ;
       }
@@ -61,11 +61,12 @@
       }
     },
     login(){
-      this.$router.push('/')
-      // this.$store.dispatch('actionLogin',{
-      //   name:this.account,
-      //   password:this.pwd,
-      // })
+//      this.$router.push('/')
+        console.log('login',this.account,this.pwd)
+       this.$store.dispatch('actionLogin',{
+         name:this.account,
+         password:this.pwd,
+       })
     },
 
 },

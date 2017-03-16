@@ -9,11 +9,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-  	user: {
-      isLogin:false,
-      name:'未登录',
-      pwd:'',
-    }
+  	user: null
   },
   mutations,
   actions,

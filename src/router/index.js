@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from 'components/Hello'
 import PageLogin from 'views/login'
 import PageIndex from 'views/index'
 
@@ -31,7 +30,7 @@ const children_user=[
 export default new Router({
   routes: [
     {
-    // meta: { requiresAuth: true },
+    meta: { requiresLogin: true },
       path: '/',
       name: 'PageIndex',
       component: PageIndex,

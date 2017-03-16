@@ -3,10 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import config from './config'
 import store from './vuex/store'
 
-import ss from './utils/ss.js'
-import {sskey_user} from './persistent.js'
+import ls from './utils/ls.js'
+import myajax from './utils/myajax.js'
+import {lskey_user} from './persistent.js'
 
 import './assets/css/global.css'
 import './assets/css/normalize.css'
@@ -14,14 +16,18 @@ import './assets/css/md_iconfont.css'
 
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
+
+import Toast from './components/toast'
+
 Vue.use(MuseUI)
+Vue.use(Toast)
 
 router.beforeEach((to,from, next) => {
   console.log('to.path',to.path);
-  if (to.matched.some(record => record.meta.requiresAuth) && !store.state.user.isLogin) {
-    var user=ss.jsonVal(sskey_user)
-    if (user && typeof user =='object') {
-      console.log('has sesssionStorge');
+  if (to.matched.some(record => record.meta.requiresLogin) && !store.state.user) {
+    let user=ls.val(lskey_user)
+    if (user && user.access_token ) {
+      console.log('has user ls');
       store.dispatch('setUserLogin',user)
       next()
     }else{
@@ -44,3 +50,23 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+myajax.param_token_key='access_token'
+myajax.prefix='http://swingcar.com/'
+myajax.defaultFailCallback=(err)=>{
+  alert(config.APP_DEBUG?JSON.stringify(err):'请求失败，请稍后重试')
+  console.log(err)
+}
+window.onerror=(err)=>{
+  console.log(err)
+  if (config.APP_DEBUG){
+      return alert(JSON.stringify(err))
+  }
+
+}
+
+window.myajax=myajax
+window.router=router
+window.config=config
+window.Toast=Toast
+// window.log=console.log

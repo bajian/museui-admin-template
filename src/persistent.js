@@ -8,7 +8,7 @@ export const  lskey_username="lskey_username"
 export const  lskey_password="lskey_password"
 
 
-// sessionStorage user object
-export const  sskey_user="sskey_user"
+// user object
+export const  lskey_user="lskey_user"
 
 

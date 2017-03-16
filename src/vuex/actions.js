@@ -8,7 +8,7 @@ import * as types from './mutation-types'
 import ls from '../utils/ls.js'
 import ss from '../utils/ss.js'
 // import sha1 from 'sha1'
-import {lskey_username,lskey_password,sskey_user} from '../persistent.js'
+import {lskey_username,lskey_password,lskey_user} from '../persistent.js'
 
 import {api_login,api_register} from '../api.js'
 
@@ -33,34 +33,24 @@ export const setUserLogout = ({ commit },user) => {
     const name=obj.name
     let password=obj.password
     const autoLogin=obj.autoLogin
-    if (!name || name.length!=11) 
-      return !autoLogin && bridge.toast('手机号不是11位')
-    if (password==undefined || !password) 
-      return !autoLogin && bridge.toast('密码为空')
-    // if (password.length!=40) 
-    //   password=sha1(password)
+    // if (!name || name.length!==11)
+    //   return !autoLogin && bridge.toast('手机号不是11位')
+    if (password===undefined || !password|| !name)
+      return !autoLogin && Toast.warn('账号/密码为空')
     myajax.cpost(api_login,{
-      username:name,
+      name:name,
       password:password
     },(data)=>{
-      if (data && data.errcode!=0) 
-        return bridge.toast(data.errmsg)
-      var user={
-        isLogin:true,
-        name:name,
-        pwd:password,
-        id:data.id
-      }
+      if (data && data.code!=0)
+        return Toast.error(data.msg||'登录失败')
+      var user=data
       commit(types.SET_USER_LOGIN, user)
-      router.push(window.redirect||'/index/schoolmate')
+      router.push(window.redirect||'/')
       ls.val(lskey_username,name)
-      ls.val(lskey_password,password)
-      ss.jsonVal(sskey_user,user)
+      // ls.val(lskey_password,password)
+      ls.val(lskey_user,user)
       delete window.redirect
       delete window.notAutoLogin
-      setTimeout(()=>{
-        bridge.invoke('clearWebviewHistory')
-      }, 10);
     })
   }
 

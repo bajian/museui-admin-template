@@ -13,7 +13,7 @@
         ></vuetable-pagination-info>
 
         <vuetable-pagination ref="pagination"
-                             @vuetable-pagination:change-page="onChangePage"
+           @vuetable-pagination:change-page="onChangePage"
         ></vuetable-pagination>
     </div>
     <button @click="changeUrl">refresh</button>
