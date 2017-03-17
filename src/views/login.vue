@@ -1,11 +1,11 @@
 <template>
-  <div class="login-body">
+  <div class="login-body"  @keyup.enter="login">
 
   <div>
   <label class="title">后台管理</label><br/>
     <mu-text-field label="用户名" v-model="account" labelFloat/><br/>
   <mu-text-field label="密码" hintText="请输入密码" v-model="pwd" type="password" labelFloat/><br/>
-   <mu-raised-button @click="login()" label="登录" class="demo-raised-button" primary/>
+   <mu-raised-button @click="login" label="登录" class="demo-raised-button" primary/>
   </div>
 
   </div>
