@@ -25,7 +25,7 @@ Vue.use(Toast)
 router.beforeEach((to,from, next) => {
   console.log('to.path',to.path);
   if (to.matched.some(record => record.meta.requiresLogin) && !store.state.user) {
-    let user=ls.val(lskey_user)
+    let user=ls.jsonVal(lskey_user)
     if (user && user.access_token ) {
       console.log('has user ls');
       store.dispatch('setUserLogin',user)

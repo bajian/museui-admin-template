@@ -43,12 +43,12 @@ export const setUserLogout = ({ commit },user) => {
     },(data)=>{
       if (data && data.code!=0)
         return Toast.error(data.msg||'登录失败')
-      var user=data
+      var user=data.data
       commit(types.SET_USER_LOGIN, user)
       router.push(window.redirect||'/')
       ls.val(lskey_username,name)
       // ls.val(lskey_password,password)
-      ls.val(lskey_user,user)
+      ls.jsonVal(lskey_user,user)
       delete window.redirect
       delete window.notAutoLogin
     })
