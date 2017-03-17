@@ -16,7 +16,6 @@
            @vuetable-pagination:change-page="onChangePage"
         ></vuetable-pagination>
     </div>
-    <button @click="changeUrl">refresh</button>
 </div>
 </div>
 </template>
@@ -27,8 +26,10 @@ import VuetablePagination from 'vuetable-2/src/components/VuetablePagination'
 import VuetablePaginationInfo from 'vuetable-2/src/components/VuetablePaginationInfo'
 
 import {api_userList} from '../../api.js'
+import mixins from '../../mixins.js'
 
 export default {
+    mixins:[mixins],
   data () {
     return {
       title: '',
@@ -59,7 +60,7 @@ export default {
 
       changeUrl () {
           console.log('changeUrl b4',this.api_url);
-          this.api_url=api_userList
+          this.api_url=this.appendAccessToken(api_userList)
           console.log('changeUrl after',this.api_url);
           this.$nextTick(()=>{
               this.$refs.vuetable.refresh()
