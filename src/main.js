@@ -57,6 +57,13 @@ myajax.defaultFailCallback=(err)=>{
   alert(config.APP_DEBUG?JSON.stringify(err):'请求失败，请稍后重试')
   console.log(err)
 }
+myajax.defaultMiddleware=(data)=>{
+  console.log('defaultMiddleware',data)
+    if (data && data.code===config.NOT_LOGIN_CODE){
+        window.redirect=router.currentRoute.path
+        router.replace('/login')
+    }
+}
 window.onerror=(err)=>{
   console.log(err)
   if (config.APP_DEBUG){

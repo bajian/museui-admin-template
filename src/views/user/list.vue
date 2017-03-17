@@ -6,6 +6,7 @@
               pagination-path=""
               @vuetable:pagination-data="onPaginationData"
               @vuetable:load-error="onLoadError"
+              @vuetable:load-success="onLoadSuccess"
               :fields="fields"
     ></vuetable>
     <div class="vuetable-pagination ui basic segment grid">
@@ -35,20 +36,24 @@ export default {
       title: '',
       api_url: '',
 //      api_url: 'http://swingcar.com/api/v1/admin/user/list',
-      fields: ['id', 'openid', 'nickname', 'created_at', 'balance', 'subscribe', 'city'],
+      fields: ['id', 'openid', {
+          name: 'nickname',
+          dataClass: 'center aligned',
+          titleClass: 'center aligned',
+          title: '昵称',
+      }, 'created_at', 'balance', 'subscribe', 'city'],
     }
   },
   mounted () {
     this.$nextTick(()=>{
         this.changeUrl ()
-//        console.log('mounted->',this.name)
     })
   },
   methods: {
       onPaginationData (paginationData) {
           this.$refs.pagination.setPaginationData(paginationData)
           this.$refs.paginationInfo.setPaginationData(paginationData)
-          console.log('onPaginationData',paginationData);
+//          console.log('onPaginationData',paginationData);
       },
       onChangePage (page) {
           this.$refs.vuetable.changePage(page)
@@ -56,6 +61,14 @@ export default {
       },
       onLoadError (response) {
           console.log('onLoadError',response);
+      },
+
+      onLoadSuccess (response) {
+          console.log('onLoadSuccess',response);
+          if (response.body && response.body.code && response.body.code===config.NOT_LOGIN_CODE){
+              window.redirect=this.$route.path
+              this.goTo('/login')
+          }
       },
 
       changeUrl () {
