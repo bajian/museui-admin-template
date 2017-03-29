@@ -7,8 +7,6 @@
               @vuetable:pagination-data="onPaginationData"
               @vuetable:load-error="onLoadError"
               @vuetable:load-success="onLoadSuccess"
-              @itemclick="onItemClick"
-              :load-on-start="false"
               :fields="fields"
     ></vuetable>
     <div class="vuetable-pagination ui basic segment grid">
@@ -28,11 +26,7 @@ import Vuetable from 'vuetable-2/src/components/Vuetable'
 import VuetablePagination from 'vuetable-2/src/components/VuetablePagination'
 import VuetablePaginationInfo from 'vuetable-2/src/components/VuetablePaginationInfo'
 
-import UserListCustomActions from '../components/UserListCustomActions.vue'
-import Vue from 'vue'
-Vue.component('custom-actions', UserListCustomActions)
-
-import {api_userList} from '../../api.js'
+import {api_merchantList} from '../../api.js'
 import mixins from '../../mixins.js'
 
 export default {
@@ -42,28 +36,62 @@ export default {
       title: '',
       api_url: 'aa',
 //      api_url: 'http://swingcar.com/api/v1/admin/user/list',
-      fields: ['id', 'openid', {
+      fields: ['id', 'openid',{
           name: 'nickname',
           dataClass: 'center aligned',
           titleClass: 'center aligned',
           title: '昵称',
-      }, 'created_at', {
-          name: 'balance',
+      },{
+          name: 'merchant.real_name',
           dataClass: 'center aligned',
           titleClass: 'center aligned',
-          title: '余额',
+          title: '姓名',
       },{
+          name: 'merchant.phone',
+          dataClass: 'center aligned',
+          titleClass: 'center aligned',
+          title: '手机号',
+      },{
+          name: 'merchant.created_at',
+          dataClass: 'center aligned',
+          titleClass: 'center aligned',
+          title: '商户注册',
+      }, {
+          name: 'created_at',
+          dataClass: 'center aligned',
+          titleClass: 'center aligned',
+          title: '微信关注',
+      }, {
+          name: 'merchant.balance',
+          dataClass: 'center aligned',
+          titleClass: 'center aligned',
+          title: '商户余额',
+      },{
+          name: 'merchant.car_count',
+          dataClass: 'center aligned',
+          titleClass: 'center aligned',
+          title: '设备数',
+      },{
+              name: 'merchant.province.name',
+              dataClass: 'center aligned',
+              titleClass: 'center aligned',
+              title: '省',
+          },  {
+              name: 'merchant.city.name',
+              dataClass: 'center aligned',
+              titleClass: 'center aligned',
+              title: '市',
+          },{
+              name: 'merchant.county.name',
+              dataClass: 'center aligned',
+              titleClass: 'center aligned',
+              title: '区',
+          }, {
           name: 'subscribe',
           dataClass: 'center aligned',
           titleClass: 'center aligned',
-          title: '关注',
-          callback: 'subscribeCB'
-      } , 'city',{
-          name: '__component:custom-actions',
-          title: '操作',
-          titleClass: 'center aligned',
-          dataClass: 'center aligned'
-      }],
+          title: '关注状态',
+      } ],
     }
   },
   mounted () {
@@ -79,21 +107,9 @@ export default {
           this.$refs.paginationInfo.setPaginationData(paginationData)
 //          console.log('onPaginationData',paginationData);
       },
-      onItemClick (opt) {
-          console.log('onItemClick',JSON.stringify(opt))
-          switch (opt.action){
-              case 'view-item':
-                  this.goTo('/user/detail/'+opt.data.id)
-                  break;
-              case 'edit-item':
-                  break;
-              case 'delete-item':
-                  break;
-          }
-      },
       onChangePage (page) {
           this.$refs.vuetable.changePage(page)
-          console.log('onChangePage',page);
+//          console.log('onChangePage',page);
       },
       onLoadError (response) {
           console.log('onLoadError',response);
@@ -109,15 +125,12 @@ export default {
 
       changeUrl () {
           console.log('changeUrl b4',this.api_url);
-          this.api_url=this.appendAccessToken(api_userList)
+          this.api_url=this.appendAccessToken(api_merchantList)
           console.log('changeUrl after',this.api_url);
           this.$nextTick(()=>{
               this.$refs.vuetable.refresh()
           })
       },
-      subscribeCB(value){
-          return value===1?'关注':'取关'
-      }
 
 
   },

@@ -4,8 +4,10 @@
       <mu-icon-button @click="toggleNav" icon="menu" slot="left"/>
     </mu-appbar>
     <app-nav @change="handleMenuChange" @close="toggleNav" :open="open" :docked="docked" />
-    <div class="example-content" :class="{'nav-hide': !open}">
-      <router-view></router-view>
+    <div class="example-content" :class="{'nav-hide':(!open)}">
+      <keep-alive>
+          <router-view></router-view>
+      </keep-alive>
     </div>
   </div>
 </template>
@@ -93,7 +95,7 @@ function isDesktop () {
 
 .example-content{
   padding-top: 56px;
-  padding-left: 256px;
+  padding-left: 246px;
   transition: all .45s @easeOutFunction;
   &.nav-hide {
     padding-left: 0;
@@ -101,7 +103,7 @@ function isDesktop () {
 }
 
 .content-wrapper{
-  padding: 48px 72px;
+  padding: 18px 72px;
 }
 
 @media (min-width: 480px) {

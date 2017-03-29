@@ -20,6 +20,10 @@ export const setUserLogout = ({ commit },user) => {
   commit(types.SET_USER_LOGOUT, user)
 }
 
+// export const actionAddSingleDevice=({commit},obj)=>{
+//
+// }
+
 
 
    /**
@@ -45,6 +49,7 @@ export const setUserLogout = ({ commit },user) => {
         return Toast.error(data.msg||'登录失败')
       var user=data.data
       commit(types.SET_USER_LOGIN, user)
+        myajax.param_token=user.access_token
       router.push(window.redirect||'/')
       ls.val(lskey_username,name)
       // ls.val(lskey_password,password)

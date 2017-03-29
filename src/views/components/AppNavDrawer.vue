@@ -10,11 +10,15 @@
   <mu-list @change="handleMenuChange" :value="menuVal">
     <mu-list-item title="用户管理" toggleNested>
       <mu-list-item value="#/user/list" slot="nested" title="列表"/>
-      <mu-list-item value="#/user/detail" slot="nested" title="详情"/>
+      <!--<mu-list-item value="#/user/detail" slot="nested" title="详情"/>-->
     </mu-list-item>
     <mu-list-item title="设备管理" toggleNested>
       <mu-list-item slot="nested" value="#/device/list" title="列表"/>
       <mu-list-item slot="nested" value="#/device/detail" title="详情"/>
+    </mu-list-item>
+    <mu-list-item title="商户管理" toggleNested>
+      <mu-list-item slot="nested" value="#/merchant/list" title="列表"/>
+      <mu-list-item slot="nested" value="#/merchant/detail" title="详情"/>
     </mu-list-item>
 
   </mu-list>

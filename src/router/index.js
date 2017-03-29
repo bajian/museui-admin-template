@@ -7,6 +7,8 @@ import SubPageUserList from 'views/user/list'
 import SubPageUserDetail from 'views/user/detail'
 import SubPageDeviceList from 'views/device/list'
 import SubPageDeviceDetail from 'views/device/detail'
+import SubPageMerchantDetail from 'views/merchant/detail'
+import SubPageMerchantList from 'views/merchant/list'
 
 Vue.use(Router)
 
@@ -16,16 +18,27 @@ export const router_title={
   '/user/detail':'用户详情',
   '/device/list':'设备列表',
   '/device/detail':'设备详情',
+  '/merchant/list':'商户列表',
+  '/merchant/detail/:phone':'商户详情',
 }
 
 const children_user=[
 {
+      path: '/merchant/list',
+      name: 'SubPageMerchantList',
+      component: SubPageMerchantList
+    },
+{
+      path: '/merchant/detail',
+      name: 'SubPageMerchantDetail',
+      component: SubPageMerchantDetail
+    },{
       path: '/user/list',
       name: 'SubPageUserList',
       component: SubPageUserList
     },
 {
-      path: '/user/detail',
+      path: '/user/detail/:id',
       name: 'SubPageUserDetail',
       component: SubPageUserDetail
     },
@@ -36,6 +49,10 @@ const children_user=[
     },
 {
       path: '/device/detail',
+      name: 'SubPageDeviceDetail',
+      component: SubPageDeviceDetail
+    },{
+      path: '/device/detail/:device_id',
       name: 'SubPageDeviceDetail',
       component: SubPageDeviceDetail
     },

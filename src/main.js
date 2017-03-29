@@ -27,6 +27,7 @@ router.beforeEach((to,from, next) => {
   if (to.matched.some(record => record.meta.requiresLogin) && !store.state.user) {
     let user=ls.jsonVal(lskey_user)
     if (user && user.access_token ) {
+        myajax.param_token=user.access_token
       console.log('has user ls');
       store.dispatch('setUserLogin',user)
       next()
@@ -52,13 +53,14 @@ new Vue({
 })
 
 myajax.param_token_key='access_token'
-myajax.prefix='http://swingcar.com/'
+myajax.prefix=config.API_HOST
 myajax.defaultFailCallback=(err)=>{
   alert(config.APP_DEBUG?JSON.stringify(err):'请求失败，请稍后重试')
   console.log(err)
 }
 myajax.defaultMiddleware=(data)=>{
   console.log('defaultMiddleware',data)
+
     if (data && data.code===config.NOT_LOGIN_CODE){
         window.redirect=router.currentRoute.path
         router.replace('/login')

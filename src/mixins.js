@@ -18,7 +18,12 @@ export default {
 		},
 		appendAccessToken(url){
 		    let key=`access_token=${this.getAccessToken()}`
-            return (url.indexOf('&')>0?(url+'&'+key):(url+'?'+key))
+            if (url.indexOf('?')===url.length-1)//去掉?
+                url.substr(0,url.length-1)
+            return (url.indexOf('?')>0?(url+'&'+key):(url+'?'+key))
+		},
+		setArg(argKey,value){//对任意变量赋值，适用于类似开关之类的等等
+		    this[argKey]=value
 		}
 	}
 }
