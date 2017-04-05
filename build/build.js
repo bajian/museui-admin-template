@@ -20,7 +20,7 @@ shell.mkdir('-p', assetsPath)
 shell.config.silent = true
 shell.cp('-R', 'static/*', assetsPath)
 shell.config.silent = false
-
+require('./change-config')(1)
 webpack(webpackConfig, function (err, stats) {
   spinner.stop()
   if (err) throw err
