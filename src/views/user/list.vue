@@ -30,7 +30,7 @@ import VuetablePaginationInfo from 'vuetable-2/src/components/VuetablePagination
 
 import UserListCustomActions from '../components/UserListCustomActions.vue'
 import Vue from 'vue'
-Vue.component('custom-actions', UserListCustomActions)
+Vue.component('user-list-custom-actions', UserListCustomActions)
 
 import {api_userList} from '../../api.js'
 import mixins from '../../mixins.js'
@@ -59,7 +59,7 @@ export default {
           title: '关注',
           callback: 'subscribeCB'
       } , 'city',{
-          name: '__component:custom-actions',
+          name: '__component:user-list-custom-actions',
           title: '操作',
           titleClass: 'center aligned',
           dataClass: 'center aligned'

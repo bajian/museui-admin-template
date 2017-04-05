@@ -15,13 +15,7 @@ export default {
   },
 
   [types.SET_USER_LOGOUT] (state) {
-    state.user={
-      isLogin:false,
-      name:'未登录',
-      pwd:'',
-      account:'',
-      avatar:'/static/bili_default_avatar.png',
-    }
+    state.user=null
   }
 
 }

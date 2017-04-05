@@ -3,7 +3,7 @@
     <mu-appbar :zDepth="0" :title="title" class="example-appbar" :class="{'nav-hide': !open}">
       <mu-icon-button @click="toggleNav" icon="menu" slot="left"/>
     </mu-appbar>
-    <app-nav @change="handleMenuChange" @close="toggleNav" :open="open" :docked="docked" />
+    <app-nav @iconitemclick="onIconItemClick" @change="handleMenuChange" @close="toggleNav" :open="open" :docked="docked" />
     <div class="example-content" :class="{'nav-hide':(!open)}">
       <keep-alive>
           <router-view></router-view>
@@ -43,6 +43,13 @@ export default {
     toggleNav () {
       this.open = !this.open
     },
+      onIconItemClick (item) {
+        switch (item.value){
+            case 'log_out':
+                this.$store.dispatch('actionLogout')
+                break;
+        }
+    },
     changeNav () {
       const desktop = isDesktop()
       this.docked = desktop
@@ -63,7 +70,13 @@ export default {
       if (path && path.length > 1) 
         path = path.substring(1)
       console.log(path);
-      this.title = router_title[path] || ''
+      this.title = router_title[path]  || ''
+        if (!this.title){
+          for (let i in router_title){
+              if(i.length>2 && (new RegExp(i,'g')).test(path))
+                  return this.title=router_title[i]
+          }
+        }
     }
   },
   destroyed () {

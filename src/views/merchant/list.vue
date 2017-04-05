@@ -51,6 +51,7 @@ export default {
           dataClass: 'center aligned',
           titleClass: 'center aligned',
           title: '手机号',
+          callback: 'phoneCB'
       },{
           name: 'merchant.created_at',
           dataClass: 'center aligned',
@@ -130,6 +131,11 @@ export default {
           this.$nextTick(()=>{
               this.$refs.vuetable.refresh()
           })
+      },
+      phoneCB (phone) {
+          if (phone)
+              return '<a href="#/merchant/detail/'+phone+'">'+(phone)+'</a>'
+          return ''
       },
 
 

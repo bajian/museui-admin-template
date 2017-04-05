@@ -10,7 +10,7 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
     
-     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js" charset="utf-8"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js" charset="utf-8"></script>
     <script src="//cdn.bootcss.com/semantic-ui/2.2.9/semantic.min.js" charset="utf-8"></script>
   </body>
 </html>

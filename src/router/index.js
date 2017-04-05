@@ -19,7 +19,7 @@ export const router_title={
   '/device/list':'设备列表',
   '/device/detail':'设备详情',
   '/merchant/list':'商户列表',
-  '/merchant/detail/:phone':'商户详情',
+  '/merchant/detail':'商户详情',
 }
 
 const children_user=[
@@ -30,6 +30,10 @@ const children_user=[
     },
 {
       path: '/merchant/detail',
+      name: 'SubPageMerchantDetail',
+      component: SubPageMerchantDetail
+    },{
+      path: '/merchant/detail/:phone',
       name: 'SubPageMerchantDetail',
       component: SubPageMerchantDetail
     },{

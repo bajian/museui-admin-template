@@ -79,3 +79,7 @@ window.router=router
 window.config=config
 window.Toast=Toast
 // window.log=console.log
+
+if (!config.APP_DEBUG){
+    console.log=()=>{}
+}

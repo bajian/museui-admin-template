@@ -180,6 +180,14 @@
     mounted () {
 
   },
+        beforeRouteEnter(to ,from ,next){
+            console.log('merchat/detail beforeRouteEnter')
+            next(vm => {
+                console.log('merchat/detail ',vm.$route.params)
+                if (vm.$route.params && vm.$route.params['phone'])
+                    vm.phone=vm.$route.params.phone
+            })
+        },
     watch: {
         phone:  function(val, oldVal) {
             if (val.length===11)

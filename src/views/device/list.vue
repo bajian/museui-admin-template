@@ -133,10 +133,11 @@ export default {
           titleClass: 'center aligned',
           title: '密码',
       },          {
-          name: 'merchant.real_name',
+          name: 'merchant',
           dataClass: 'center aligned',
           titleClass: 'center aligned',
           title: '商户',
+          callback: 'merchantCB'
       },
           {
           name: 'reference',
@@ -338,6 +339,11 @@ export default {
           }else{
               return alert('信息未填完整')
           }
+      },
+      merchantCB(merchant){
+          if (merchant && merchant['phone'])
+              return '<a href="#/merchant/detail/'+merchant['phone']+'">'+(merchant['real_name']||merchant['phone'])+'</a>'
+          return ''
       },
 
 

@@ -10,14 +10,25 @@ import ss from '../utils/ss.js'
 // import sha1 from 'sha1'
 import {lskey_username,lskey_password,lskey_user} from '../persistent.js'
 
-import {api_login,api_register} from '../api.js'
+import {api_login,api_register,api_logout} from '../api.js'
 
 export const setUserLogin = ({ commit },user) => {
   commit(types.SET_USER_LOGIN, user)
 }
 
-export const setUserLogout = ({ commit },user) => {
-  commit(types.SET_USER_LOGOUT, user)
+export const actionLogout = ({ commit }) => {
+    myajax.cpost(api_logout,{},(data)=>{
+        if (data && data.code!==0)
+            return Toast.error(data.msg||'请求失败')
+        myajax.param_token=''
+        commit(types.SET_USER_LOGOUT)
+        ls.remove(lskey_username)
+        ls.remove(lskey_user)
+        window.redirect=router.currentRoute.fullPath
+        window.notAutoLogin=true
+        router.push('/login')
+    })
+
 }
 
 // export const actionAddSingleDevice=({commit},obj)=>{

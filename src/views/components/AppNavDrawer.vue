@@ -3,7 +3,10 @@
   <mu-appbar class="exmaples-nav-appbar" :zDepth="0">
   <mu-icon value="home" :size="32"/>
     <a class="exmaples-appbar-title" @click="handleMenuChange('#/')" href="#/" style="display:inline-block;">摇摇车</a>
-    
+      <mu-icon-menu @itemClick="iconMenuClick" icon="more_vert" slot="right">
+          <mu-menu-item value="detail" title="详情"/>
+          <mu-menu-item value="log_out" title="退出"/>
+      </mu-icon-menu>
   </mu-appbar>
   <mu-divider/>
 
@@ -51,6 +54,9 @@ export default {
 
     handleClose () {
       this.$emit('close')
+    },
+      iconMenuClick (item) {
+          this.$emit('iconitemclick',item)
     },
     handleMenuChange (val) {
       this.menuVal = val
