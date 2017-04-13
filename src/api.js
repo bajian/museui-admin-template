@@ -1,5 +1,5 @@
 // 约定：转发的api不带http前缀
-import config from './config'
+import config from './config/config'
 const API_HOST=config.API_HOST
 // 登录
 export const  api_login="/api/v1/admin/login"

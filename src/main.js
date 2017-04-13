@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import config from './config'
+import config from './config/config'
 import store from './vuex/store'
 
 import ls from './utils/ls.js'
